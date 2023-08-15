@@ -7,17 +7,17 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
  
-class node implements Comparable<node> {
+class node1 implements Comparable<node1> {
     int targetNode;
     int value;
  
-    node(int targetNode, int value) {
+    node1(int targetNode, int value) {
         this.targetNode = targetNode;
         this.value = value;
     }
  
     @Override
-    public int compareTo(node o) {
+    public int compareTo(node1 o) {
         return value - o.value;
     }
  
@@ -25,7 +25,7 @@ class node implements Comparable<node> {
  
 public class P1916_최소비용구하기 {
     static int N, M;
-    static ArrayList<node>[] list; // 인접리스트로 그래프 표현하기.
+    static ArrayList<node1>[] list; // 인접리스트로 그래프 표현하기.
     static int[] dist; // 최단거리 배열.
     static boolean[] check; // 사용노드인지 확인하는 배열.
  
@@ -43,7 +43,7 @@ public class P1916_최소비용구하기 {
         Arrays.fill(dist, Integer.MAX_VALUE);
  
         for (int i = 0; i <= N; i++) {
-        	list[i] = new ArrayList<node>();
+        	list[i] = new ArrayList<node1>();
         }
  
         // 주어진 그래프의 간선들을 인접리스트 자료구조에 넣는 부분
@@ -53,7 +53,7 @@ public class P1916_최소비용구하기 {
             int end = Integer.parseInt(st.nextToken());
             int weight = Integer.parseInt(st.nextToken());
  
-            list[start].add(new node(end, weight));
+            list[start].add(new node1(end, weight));
         }
  
         st = new StringTokenizer(br.readLine());
@@ -69,21 +69,21 @@ public class P1916_최소비용구하기 {
  
     // 다익스트라 알고리즘
     public static int dijkstra(int start, int end) {
-        PriorityQueue<node> pq = new PriorityQueue<>();
+        PriorityQueue<node1> pq = new PriorityQueue<>();
         boolean[] check = new boolean[N + 1];
-        pq.offer(new node(start, 0));
+        pq.offer(new node1(start, 0));
         dist[start] = 0;
  
         while (!pq.isEmpty()) {
-        	node nowNode = pq.poll();
+        	node1 nowNode = pq.poll();
             int now = nowNode.targetNode;
  
             if (!check[now]) {
                 check[now] = true;
-                for (node n : list[now]) {  //선택노드 + 가중치 < 타켓노드인 경우 값을 갱신하는 부분
+                for (node1 n : list[now]) {  //선택노드 + 가중치 < 타켓노드인 경우 값을 갱신하는 부분
                     if (dist[n.targetNode] > dist[now] + n.value) {
                         dist[n.targetNode] = dist[now] + n.value;
-                        pq.add(new node(n.targetNode, dist[n.targetNode]));
+                        pq.add(new node1(n.targetNode, dist[n.targetNode]));
                     }
                 }
             }
