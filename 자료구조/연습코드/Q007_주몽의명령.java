@@ -94,5 +94,6 @@ public class Q007_주몽의명령 {
 		}
 		
 		System.out.println("RS : "+ cnt);
+		bf.close();
 	}
 }
